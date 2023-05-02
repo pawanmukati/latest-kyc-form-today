@@ -1,0 +1,112 @@
+html, body {
+  height: 90%;
+  width: 96%;
+  background: #eee;
+  margin: 10px auto;
+}
+
+.modal {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 100%;
+  z-index: 1111;
+  display: none;
+  transition: 0.5s ease all;
+
+}
+
+.modal.show{
+  top: 50%;
+  transition: opacity .15s linear;
+  display: block;
+}
+.modal.show .modal-dialog {
+  padding: 60px 60px 30px;
+  width: 100%;
+  max-width: 50%;
+  background: #fff;
+  margin: 0 auto;
+  border-radius: 5px;
+  box-shadow: 0 2px 15px -3px rgba(0,0,0,0.07),0 10px 20px -2px rgba(0,0,0,0.04);
+  position: relative;
+}
+
+.modal.show .modal-dialog h5.modal-title {
+  font-size: 35px;
+  margin: 0;
+}
+
+.modal.show .modal-dialog h5.modal-title {
+  font-size: 35px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.modal.show .modal-dialog button.ripple.ripple-surface.btn-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.modal.show .modal-dialog button.ripple.ripple-surface.btn-close:after {
+  content: "X";
+  font-size: 14px;
+  font-weight: 700;
+}
+.modal.show .modal-dialog button.ripple.ripple-surface.btn-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 25px;
+  height: 25px;
+  border: none;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 30px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.modal.show .modal-dialog .modal-body {
+  font-size: 18px;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 20px;
+  max-width: 540px;
+  margin: 40px auto 0px;
+}
+
+.modal.fade.show .modal-footer{
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.modal.fade.show .modal-footer button.btn-secondary {
+  background: #000;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1), 0px 12px 20px rgba(90, 113, 0, 0.25), inset 2px -4px 4px rgba(0, 0, 0, 0.25) !important;
+  border-radius: 5px;
+  padding: 10px 30px;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.modal.fade.show .modal-footer button.btn-primary {
+  background: #ff9728;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1), 0px 12px 20px rgba(90, 113, 0, 0.25), inset 2px -4px 4px rgba(0, 0, 0, 0.25) !important;
+  border-radius: 5px;
+  padding: 10px 30px;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  margin-left: 15px;
+  cursor: pointer;
+}
