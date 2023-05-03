@@ -3,6 +3,7 @@ import './App.css';
 import MyForm from './myForm';
 import MailForm from './mailForm';
 import Newform from './Newform';
+// import Testform from './Testform';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
         {/* <MyForm /> */}
         {/* <MailForm   /> */}
         <Newform   />
+        {/* <Testform   /> */}
         
     </div>
   );

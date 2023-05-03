@@ -6,15 +6,15 @@ html, body {
 }
 
 .modal {
-  position: absolute;
+  /* position: absolute;
   top: 100%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
   max-width: 100%;
-  z-index: 1111;
+  z-index: 1111; */
   display: none;
-  transition: 0.5s ease all;
+  /* transition: 0.5s ease all; */
 
 }
 
@@ -22,6 +22,12 @@ html, body {
   top: 50%;
   transition: opacity .15s linear;
   display: block;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 100%;
+  z-index: 1111;
 }
 .modal.show .modal-dialog {
   padding: 60px 60px 30px;
@@ -30,7 +36,7 @@ html, body {
   background: #fff;
   margin: 0 auto;
   border-radius: 5px;
-  box-shadow: 0 2px 15px -3px rgba(0,0,0,0.07),0 10px 20px -2px rgba(0,0,0,0.04);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   position: relative;
 }
 
@@ -97,6 +103,9 @@ html, body {
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
+  height: 40px;
+  width: 180px;
+  overflow: hidden;
 }
 .modal.fade.show .modal-footer button.btn-primary {
   background: #ff9728;
@@ -109,4 +118,7 @@ html, body {
   font-weight: 700;
   margin-left: 15px;
   cursor: pointer;
+  height: 40px;
+  width: 180px;
+  overflow: hidden;
 }
