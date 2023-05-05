@@ -13,14 +13,20 @@ import {
   MDBModalFooter,
 } from "mdb-react-ui-kit";
 import "conversational-form/dist/conversational-form.min.css";
+import i18n from "./i18n";
+import { withTranslation } from "react-i18next";
 
 class MyForm extends React.Component {
+  changeLanguage = (lng) => {
+    this.props.i18n.changeLanguage(lng);
+  };
   constructor(props) {
     super(props);
+    const { t } = props; // access the t function using props
     this.formFields = [
       {
         tag: "cf-robot-message",
-        "cf-questions": "Hello my friend",
+        "cf-questions": "Hello my Friend",
       },
       {
         tag: "input",
@@ -29,6 +35,7 @@ class MyForm extends React.Component {
         "cf-questions":
           "Please choose your desired language for the application:",
         "cf-label": "English",
+        onClick: this.changeLanguage("en"),
         value: "English",
       },
       {
@@ -36,27 +43,28 @@ class MyForm extends React.Component {
         type: "radio",
         name: "language",
         "cf-label": "Spanish",
+        onClick: this.changeLanguage("es"),
         value: "Spanish",
       },
+     
       {
-        tag: "select",
+        tag: "input",
+        type: "radio",
         name: "signatureStatus",
         "cf-questions": "Will anybody else have signature right on the account?",
-        children: [
-          {
-            tag: "option",
-            value: "yes",
-            html: "Yes",
-            "cf-label": "Yes",
-          },
-          {
-            tag: "option",
-            value: "no",
-            html: "No",
-            "cf-label": "No",
-          },
-        ],
+        "cf-label": "Yes",
+        value: "yes",
+        html: "Yes",
       },
+      {
+        tag: "input",
+        type: "radio",
+        name: "signatureStatus",
+        "cf-label": "No",
+        value: "no",
+        html: "No",
+      },
+      // if user click "yes" then show this field
       {
         tag: "select",
         name: "signatoryRights",
@@ -66,43 +74,65 @@ class MyForm extends React.Component {
           {
             tag: "option",
             value: "1",
-            "cf-label": "1"
+            "cf-label": "1",
           },
           {
             tag: "option",
             value: "2",
-            "cf-label": "2"
+            "cf-label": "2",
           },
           {
             tag: "option",
             value: "3",
-            "cf-label": "3"
+            "cf-label": "3",
           },
           {
             tag: "option",
             value: "4",
-            "cf-label": "4"
+            "cf-label": "4",
           },
           {
             tag: "option",
             value: "5",
-            "cf-label": "5"
-          }
-        ]
-      }
-      ,
-      
+            "cf-label": "5",
+          },
+        ],
+      },
+      // add a default value for "signatoryRights" when "signatureStatus" is "No"
       {
         tag: "input",
-        type: "text",
-        name: "name",
-        "cf-questions": "What is your name?",
+        type: "hidden",
+        name: "signatoryRights",
+        value: "1",
+        "cf-conditional-signatureStatus": "^no$",
       },
 
       // {
-      //   tag: "cf-robot-message",
-      //   "cf-questions": "Enter Your Personal Information",
+      //   // tag group
+      //   tag: "fieldset",
+      //   type: "text",
+      //   "cf-input-placeholder": "names of all signatories",
+      //   "cf-questions": "Type the full names of all signatories and your relation with them.",
+      //   children: [
+      //     {
+      //       tag: "input",
+      //       type: "text",
+      //       name: "names-of-all-signatories",
+      //     },
+      //     {
+      //       tag: "input",
+      //       type: "text",
+      //       "cf-input-placeholder": "Relation with signatories",
+      //       "cf-questions": "Your relation with signatories",
+      //       name: "your-relation-with-signatories",
+      //     },
+      //   ],
       // },
+      // if user click no show this field
+      {
+        tag: "cf-robot-message",
+        "cf-questions": "Enter Your Personal Information",
+      },
       {
         tag: "input",
         type: "text",
@@ -482,21 +512,20 @@ class MyForm extends React.Component {
     // Set font style and formatting for form fields
     doc.setFontSize(12);
     doc.setTextColor(0, 0, 0); // black color
-    doc.text(20, 40, "First Name: " + formData.get("firstname"));
-    doc.text(20, 50, "Last Name: " + formData.get("lastname"));
-    doc.text(20, 60, "Date of Birth: " + formData.get("dob"));
-    doc.text(20, 70, "Nationality: " + formData.get("Nationality"));
-    doc.text(20, 80, "City Of Residence: " + formData.get("CityOfResidence"));
-    doc.text(20, 90, "Marital Status: " + formData.get("MaritalStatus"));
-    doc.text(20, 100, "Email: " + formData.get("email"));
-    doc.text(20, 110, "Phone Number: " + formData.get("phone"));
-    doc.text(20, 120, "Study: " + formData.get("study"));
-    doc.text(20, 130, "Actual Employer: " + formData.get("employer"));
-    doc.text(20, 140, "Avg Annual Income: " + formData.get("annual_income"));
-    doc.text(
-      20,
-      150,
-      "Investment Objective: " + formData.get("investmentObjective")
+    doc.text(20, 40, "Personal information");
+    doc.text(20, 50, "First Name: " + formData.get("firstname"));
+    doc.text(20, 60, "Last Name: " + formData.get("lastname"));
+    doc.text(20, 70, "Date of Birth: " + formData.get("dob"));
+    doc.text(20, 80, "Nationality: " + formData.get("Nationality"));
+    doc.text(20, 90, "City Of Residence: " + formData.get("CityOfResidence"));
+    doc.text(20, 100, "Marital Status: " + formData.get("MaritalStatus"));
+    doc.text(20, 110, "Email: " + formData.get("email"));
+    doc.text(20, 120, "Phone Number: " + formData.get("phone"));
+    doc.text(80, 40, "Other information");
+    doc.text(80, 50, "Study: " + formData.get("study"));
+    doc.text(80, 60, "Actual Employer: " + formData.get("employer"));
+    doc.text(80, 70, "Avg Annual Income: " + formData.get("annual_income"));
+    doc.text(80, 80,"Investment Objective: " + formData.get("investmentObjective")
     );
     doc.save("form-data.pdf");
   };
@@ -540,4 +569,4 @@ class MyForm extends React.Component {
     );
   }
 }
-export default MyForm;
+export default withTranslation()(MyForm);
